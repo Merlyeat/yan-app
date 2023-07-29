@@ -88,6 +88,9 @@ export default function Home() {
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.autoRotate = true;
         controls.autoRotateSpeed = rotationSpeedRef.current;
+        controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+        controls.dampingFactor = 0.04;
+
 
         // Position the camera
         camera.position.z = 5;
