@@ -7,7 +7,7 @@ export default function Home() {
       <Link href="/cube">
         <button className={`${styles.btn} ${styles.btn_red}`}>See this shit...</button>
       </Link>
-      <Link href="/dinosaur">
+      <Link href="/drawingGame">
         <button className={`${styles.btn} ${styles.btn_green}`}>Normal game</button>
       </Link>
     </div>
