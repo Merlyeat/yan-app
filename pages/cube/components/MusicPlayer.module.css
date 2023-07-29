@@ -50,8 +50,8 @@
 .tooltip {
     position: absolute;
     bottom: 5px;
-    background: #ffee00;
-    color: #000000;
+    background: linear-gradient(to right, #0400ff, #ff0000);
+    color: #ffffff;
     padding: 2px 5px;
     border-radius: 50%;
     width: 20px;
@@ -68,4 +68,9 @@
 .tooltip.show {
     opacity: 1;
     bottom: 15px;
+}
+
+.visualizer {
+    width: 80%;
+    height: 100px;
 }
