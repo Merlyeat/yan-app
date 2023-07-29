@@ -4,6 +4,7 @@ import { TextureLoader, CubeTextureLoader } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import Link from "next/link";
 import styles from "./slider.module.css";
+import MusicPlayer from './components/MusicPlayer';
 
 export default function Home() {
     const canvasRef = useRef(null);
@@ -11,6 +12,7 @@ export default function Home() {
     const rotationSpeedRef = useRef(0.01);
     const [initialSize, setInitialSize] = useState(2); // Initial value for size
     const [initialSpeed, setInitialSpeed] = useState(rotationSpeedRef.current * 200); // Initial value for speed
+    const audioSrc = '/audio.mp3';
 
     const handleSliderChange = (event) => {
         const newSize = parseFloat(event.target.value);
@@ -88,6 +90,9 @@ export default function Home() {
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.autoRotate = true;
         controls.autoRotateSpeed = rotationSpeedRef.current;
+        controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+        controls.dampingFactor = 0.04;
+
 
         // Position the camera
         camera.position.z = 5;
@@ -110,13 +115,16 @@ export default function Home() {
         <>
             <div style={{ position: "absolute", top: "10px", right: "10px" }}>
                 <Link href="/">
-                    <button style={{ fontSize: '20px', width: '100px', height: '50px', backgroundColor: 'red', color: 'white', padding: '10px 20px', border: 'none', marginBottom: '10px' }}>
+                    <button className={`${styles.btn} ${styles.btn_red}`}>
                         BACK
                     </button>
                 </Link>
             </div>
-
-            <label htmlFor="sizeSlider" className={styles.label} style={{ top: "10px" }}>
+            <div style={{ position: "absolute", top: "80px", right: "10px" }}>
+                <label>Volume</label>
+                <MusicPlayer src={audioSrc} />
+            </div>
+            <label htmlFor="sizeSlider" className={styles.label} style={{ top: "0px" }}>
                 Size
             </label>
             <input
@@ -128,11 +136,11 @@ export default function Home() {
                 onChange={(e) => handleSliderChange(e)}
                 className={styles.slider}
             />
-            <div className={styles.label} style={{ top: "30px" }}>
+            {/* <div className={styles.label} style={{ top: "30px" }}>
                 Current size: {initialSize}
-            </div>
+            </div> */}
 
-            <label htmlFor="speedSlider" className={styles.label} style={{ top: "50px" }}>
+            <label htmlFor="speedSlider" className={styles.label} style={{ top: "45px" }}>
                 Speed
             </label>
             <input
@@ -145,9 +153,9 @@ export default function Home() {
                 className={styles.slider}
                 style={{ top: "70px" }}
             />
-            <div className={styles.label} style={{ top: "90px" }}>
+            {/* <div className={styles.label} style={{ top: "90px" }}>
                 Current speed: {initialSpeed.toFixed(1)}
-            </div>
+            </div> */}
             <canvas ref={canvasRef} />
         </>
     );
